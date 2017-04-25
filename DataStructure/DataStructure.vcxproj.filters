@@ -30,6 +30,15 @@
     <ClInclude Include="testAllClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LinearList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SeqList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
