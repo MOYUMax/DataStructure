@@ -79,10 +79,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CLinkList.h" />
+    <ClInclude Include="CLinkQueue.h" />
     <ClInclude Include="LinearList.h" />
     <ClInclude Include="LinkList.h" />
     <ClInclude Include="NaturalNumber.h" />
     <ClInclude Include="SeqList.h" />
+    <ClInclude Include="SeqStack.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="testAllClass.h" />

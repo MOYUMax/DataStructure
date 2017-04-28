@@ -20,6 +20,7 @@ public:
 	T Delete(int i);
 	T Get(int i);
 	int Locate(T x);
+	void Swap();
 };
 
 template <class T>
@@ -85,4 +86,22 @@ int SeqList<T>::Locate(T x)
 	return 0;
 }
 
+template <class T>
+void SeqList<T>::Swap()
+{
+	/*int i = 0, j = length-1;
+	while (i != j){
+		T temp = data[i];
+		data[i] = data[j];
+		data[j] = temp;
+		++i;
+		--j;
+	}*/
+	//上面是普通交换,下面是就地（使用附加空间最少的）交换
+	for (int i = 0; i < length / 2; ++i){
+		data[i] += data[length - 1 - i];
+		data[length - 1 - i] = data[i] - data[length - 1 - i];
+		data[i] = data[i] - data[length - 1 - i];
+	}
+}
 #endif

@@ -8,8 +8,14 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 //	testNaturalNumber();//Á·Ï°1.4 ×ÔÈ»Êý
 //	testSeqList();//parctice 2.5.1 SeqList
-	testLinkList();//practice 2.5.1 LinkList
+//	testLinkList();//practice 2.5.1 LinkList
+//	testCLinkList();//practice 2.5.5 Circular Link List
+//	Josephus(10, 3);//practice 2.5.7
+//	testParenthMatch();//parctice 3.3.1
+//	testSeqStack();//test SeqStack
+//	testCLinkQueue();//practice 3.3.2
+//	testConvertSystem();//practice 3.3.3
+	testNPBagPack();//practice 3.3.4
 	system("PAUSE");
 	return 0;
 }
-
