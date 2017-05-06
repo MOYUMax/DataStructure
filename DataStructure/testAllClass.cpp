@@ -371,3 +371,69 @@ void testNPBagPack()
 		cout << "\nOK\n";
 	}
 }
+
+void testUpTriMatrix()
+{
+	int n = 5;
+	int ** p = new int * [n];
+	p[0] = new int[n*n];
+	for (int i = 1; i < n; ++i)
+		p[i] = p[i - 1] + n;
+	int a[5][5] = {
+		{1,2,0,4,3},
+		{0,4,7,8,1},
+		{0,0,6,5,4},
+		{0,0,0,2,9},
+		{0,0,0,0,3}
+	};
+	for (int i = 0; i < 5; ++i)
+		for (int j = 0; j < 5; ++j)
+			p[i][j] = a[i][j];
+	UpTriMatrix<int> upmatrix(p, 5, ROW);
+	int ** q = upmatrix.Convert();
+	for (int i = 0; i < upmatrix.getOrder(); ++i){
+		for (int j = 0; j < upmatrix.getOrder(); ++j)
+			cout << q[i][j] << " ";
+		cout << endl;
+	}
+}
+
+void testBiTree()
+{
+	
+	string a = "ABD##EF###CG#H###";
+	char str[18] = "ABCDEFG";
+	BiTree<char> * bTree = new BiTree<char>(str,7);
+	bTree->Print(Pre);
+	bTree->Print(In);
+	bTree->Print(Post);
+	bTree->Print(Level);
+	BiTree<char> * cTree = new BiTree<char>(bTree);
+	int depth;
+	depth = cTree->Depth(cTree->root);
+	cout << "CopyTree c has depth : " << depth << endl;
+	int node = cTree->CountNode(cTree->root);
+	cout << "C Tree BiNode number =  " << node << endl;
+	int leaf = cTree->Leaf(cTree->root);
+	cout << "C Tree Leaf number = " << leaf << endl;
+}
+
+void testHuffmanTree()
+{
+	int a[8] = { 7, 19, 2, 6, 32, 3, 21, 10 };
+	char b[9] = "ABCDEFGH";
+
+	HuffmanTree huff;
+	cout << "CreateHTree:\n";
+	huff.CreateHTree(a, 8);
+	cout << "CreateCodeTable:\n";
+	huff.CreateCodeTable(b, 8);
+
+	char code[100];
+	huff.Encode(b, code, 8);
+	cout << "Encode ABCDEFGH: " << code << endl;;
+
+	char str[10];
+	huff.Decode(code, str, 8);
+	cout << "Decode : " << str << endl;
+}

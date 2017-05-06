@@ -48,6 +48,15 @@
     <ClInclude Include="CLinkQueue.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="UpTriMatrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BiTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HuffmanTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,6 +69,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="testAllClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HuffmanTree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

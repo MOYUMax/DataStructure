@@ -6,6 +6,9 @@
 #include "CLinkList.h"
 #include "SeqStack.h"
 #include "CLinkQueue.h"
+#include "UpTriMatrix.h"
+#include "BiTree.h"
+#include "HuffmanTree.h"
 
 void testNaturalNumber();//Á·Ï° 1.4 ×ÔÈ»Êý
 void testSeqList();//practice 2.5.1 Sequence List
@@ -35,4 +38,10 @@ void testConvertSystem();
 //practice 3.3.4
 int NPBagPack(int s, int * w,int n );
 void testNPBagPack();
+//practice 4.3.1
+void testUpTriMatrix();
+//practiec BiTree Self Definetion
+void testBiTree();
+//practice 5.10
+void testHuffmanTree();
 #endif

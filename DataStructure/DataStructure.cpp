@@ -15,7 +15,10 @@ int _tmain(int argc, _TCHAR* argv[])
 //	testSeqStack();//test SeqStack
 //	testCLinkQueue();//practice 3.3.2
 //	testConvertSystem();//practice 3.3.3
-	testNPBagPack();//practice 3.3.4
+//	testNPBagPack();//practice 3.3.4
+//	testUpTriMatrix();//practice 4.3.1
+	testBiTree();//practice BiTree Self Design
+//	testHuffmanTree();//practice HuffmanTree
 	system("PAUSE");
 	return 0;
 }
