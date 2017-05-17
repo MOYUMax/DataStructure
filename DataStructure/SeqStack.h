@@ -7,19 +7,21 @@
 using namespace std;
 
 const int StackSize = 1024;
-
+/*顺序栈模板类定义
+ *栈最大容量 StackSize
+ */
 template <class T>
 class SeqStack
 {
 private:
-	T data[StackSize];
-	int top;
+	T data[StackSize];	//栈数据空间
+	int top;	//栈顶
 public:
-	SeqStack(){ top = -1; }
-	void Push(T x);
-	T Pop();
-	T GetTop();
-	bool Empty();
+	SeqStack(){ top = -1; }	//无参初始化
+	void Push(T x);		//入栈
+	T Pop();	//出栈
+	T GetTop();	//获取栈顶元素（不出栈）
+	bool Empty();		//判断栈是否为空栈
 };
 
 template<class T>

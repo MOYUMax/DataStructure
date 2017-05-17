@@ -30,9 +30,6 @@
     <ClInclude Include="testAllClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="LinearList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="SeqList.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -55,6 +52,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="HuffmanTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MGraph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ALGraph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkHashTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BST.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

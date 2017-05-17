@@ -5,25 +5,27 @@
 #include <iostream>
 
 using namespace std;
-
+/*循环队列的链式存储
+ *带头结点，使用尾指针 rear
+ */
 template <class T>
 class CLinkQueue
 {
 private:
 //	Node<T> * front;
-	Node<T> * rear;
+	Node<T> * rear;		//尾指针
 	//Node<T> * GetRear()const{ return rear = cq.GetRear() };
 protected:
-	CLinkList<T> cq;
+	CLinkList<T> cq;	//以循环链表对象作为数据基础
 public:
-	CLinkQueue(){ rear = cq.GetRear(); }
+	CLinkQueue(){ rear = cq.GetRear(); }	//无参构造函数
 
-	~CLinkQueue();
-	void EnQueue(T x);
-	T DeQueue();	
-	void SetNull();
-	int GetLength();
-	bool isEmpty();
+	~CLinkQueue();		//队列类析构函数
+	void EnQueue(T x);	//队列入队
+	T DeQueue();		//队列出队
+	void SetNull();		//队列置空
+	int GetLength();	//获取队列长度并返回
+	bool isEmpty();		//判断队列是否为空
 };
 
 template <class T>

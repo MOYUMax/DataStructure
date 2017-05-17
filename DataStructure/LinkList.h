@@ -3,39 +3,41 @@
 #include <iostream>
 
 using namespace std;
-
+//单链表模板结构体
 template <class T>
 struct Node
 {
-	T data;
-	struct Node<T> * next;
+	T data;		//结点值域
+	struct Node<T> * next;		//下一结点指针
 };
-template <class T> class LinkList;
-template <class T> int compare(LinkList<T> & A, LinkList<T> & B);
-
+template <class T> class LinkList;		//单链表模板类声明
+template <class T> int compare(LinkList<T> & A, LinkList<T> & B);//单链表比较模板函数定义
+/* 单链表模板类定义
+ * 带表头结点的单链表
+ */
 template <class T>
 class LinkList
 {
 private:
-	Node<T> * front;
+	Node<T> * front;//表头结点指针
 
 public:
-	LinkList(){ front = new Node <T>; front->next = nullptr; }
-	LinkList(T a[], int n);
-	~LinkList();
-
-	Node<T> * GetFront(){ return front; }
-	void PrintList() const;
-	int GetLength() const;
-	Node<T> * Get(int i) const;
-	int Locate(T x) const;
-	void Insert(int i, T x);
-	T Delete(int i);
-	void Swap();
-
-	friend int compare<T>( LinkList<T> & A,LinkList<T> & B);
-	template <class T>
-	friend void Mearge(LinkList<T> & A, LinkList<T> & B,LinkList<T> & C);
+	LinkList(){ front = new Node <T>; front->next = nullptr; }	//无参构造函数
+	LinkList(T a[], int n);		//有参构造函数
+	~LinkList();		//析构函数
+	//成员函数
+	Node<T> * GetFront(){ return front; }	//获取头结点指针
+	void PrintList() const;		//遍历打印单链表
+	int GetLength() const;		//获取单链表表长
+	Node<T> * Get(int i) const;	//获取单链表第 i 位的结点指针（位从 1 起始）
+	int Locate(T x) const;		//定位元素 x 在单链表的的位次并返回（位 1 起计）
+	void Insert(int i, T x);	//将元素 x 插入到单链表第 i 位上
+	T Delete(int i);			//删除单链表第 i 位上的元素
+	void Reverse();				//反转单链表使新表为原表的逆序
+	//友元模板函数
+	friend int compare<T>( LinkList<T> & A,LinkList<T> & B);	//比较两个单链表
+	template <class T>		
+	friend void Mearge(LinkList<T> & A, LinkList<T> & B,LinkList<T> & C);	//合并两个单链表A,B到C（A,B会被破坏）
 };
 
 template <class T>
@@ -56,7 +58,7 @@ LinkList<T>::LinkList(T a[], int n)
 	front->next = nullptr;
 	Node<T> * r = front;
 	for (int i = 0; i < n; ++i){
-		Node<T> * s = new Node<T>;
+		Node<T> * s = new Node<T>;//为新结点分配内存空间
 		s->data = a[i];
 		r->next = s;
 		r = s;
@@ -97,6 +99,8 @@ int LinkList<T>::GetLength() const
 template <class T>
 Node<T> * LinkList<T>::Get(int i) const
 {
+	if (i < 1)
+		return nullptr;
 	Node<T> * p = front->next;
 	int j = 1;
 	while (p && j != i){
@@ -123,8 +127,8 @@ template <class T>
 void LinkList<T>::Insert(int i, T x)
 {
 	Node<T> * p = front;
-	if (i != 1) p = Get(i - 1);
-	if (p){
+	if (i != 1) p = Get(i - 1);//获取 i 前一结点的指针，如果是第一位，前结点就是 front,可以直接插入
+	if (p){		//在 p 的后面插入新结点 s
 		Node<T> * s = new Node<T>;
 		s->data = x;
 		s->next = p->next;
@@ -137,18 +141,21 @@ template <class T>
 T LinkList<T>::Delete(int i)
 {
 	Node<T> * p = front->next;
-	if (i != 1)
-		p = Get(i - 1);
-	
-	Node<T> * s = p->next;
-	T ret = s->data;
-	p->next = s->next;
-	delete s;
-	return ret;
+	if (i != 1)			//如果删除第一个结点，则直接使用 p = front->next
+		p = Get(i - 1);	//获取 i 前一结点的指针给 p .
+	if (p){
+		Node<T> * s = p->next;
+		T ret = s->data;
+		p->next = s->next;
+		delete s;
+		return ret;
+	}
+	else
+		throw "Delete Error for locate";
 }
 
 template <class T>
-void LinkList<T>::Swap()
+void LinkList<T>::Reverse()
 {
 	if (front->next == nullptr)
 		throw "Empty LinkList";

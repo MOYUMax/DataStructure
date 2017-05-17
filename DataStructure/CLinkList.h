@@ -11,17 +11,19 @@ using namespace std;
 //	T data;
 //	struct Node<T> * next;
 //};
-
+/* 循环单向链表模板类定义
+ * 使用尾指针，且带头结点
+ */
 template <class T>
 class CLinkList
 {
 private:
-	Node<T> * rear;
-	int length;
+	Node<T> * rear;		//循环单向链表尾指针
+	int length;			//循环单向链表表长
 public:
-	CLinkList(){ rear = new Node<T>; rear->next = rear; length = 0; }
-	CLinkList(T a[], int n);
-	~CLinkList();
+	CLinkList(){ rear = new Node<T>; rear->next = rear; length = 0; }	//无参构造函数
+	CLinkList(T a[], int n);		//有参构造函数
+	~CLinkList();				//析构函数
 
 	Node<T> * GetRear(){ return rear; }//获取头指针
 	int GetLength() const;//获取长度
@@ -57,7 +59,7 @@ CLinkList<T>::~CLinkList()
 	Node<T> * p = rear->next;
 	Node<T> * q = p->next;
 	while (p != rear && q != nullptr ){
-		if (q == rear){
+		if (q == rear){//保留 rear，使单循环链表为空表
 			rear = p;
 		}
 		p->next = q->next;		
@@ -111,17 +113,19 @@ void CLinkList<T>::Insert(int i, T x)
 	if (i <= 0){		
 		throw "Insert Error for i <= 0";
 	}
-	Node<T> * p = rear->next;//头结点		
-	for (int j = 0; j < i-1; ++j){
+	Node<T> * p = rear->next;//头结点	
+	int j = 0;
+	for (j = 1; p && j < i; ++j){
 		p = p->next;
 	}//到达第i节点的前一节点
-
+	if (j != i)
+		throw "Insert Error, Bad locate i";
 	Node<T> * s = new Node<T>;
 	s->data = x;
 	s->next = p->next;
 	p->next = s;
 	++length;
-	if (p == rear)
+	if (p == rear)//如果插入的位置 i 为 rear，则将rear 指针指向新结点 s
 		rear = s;
 	return;
 }
@@ -131,8 +135,10 @@ void CLinkList<T>::Insert(int i, Node<T> * s)
 {
 	Node<T> * p = rear->next;
 	int j = 0;
-	while (++j < i)
+	while (p && ++j < i)
 		p = p->next;
+	if (j != i)
+		throw "Insert Error ,Bad locate i";
 	s->next = p->next;
 	p->next = s;
 	if (p == rear)
@@ -164,7 +170,7 @@ template <class T>
 T CLinkList<T>::Delete(Node<T> * s)
 {
 	Node<T> * p = rear->next;
-	while (p != rear&& p->next != s){
+	while (p != rear && p->next != s){
 		p = p->next;
 	}
 	if (s == rear)

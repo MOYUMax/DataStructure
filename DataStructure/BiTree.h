@@ -12,6 +12,7 @@ struct BiNode
 	T data;				//二叉树节点数据域
 	BiNode<T> * lchild;	//节点左孩子指针域
 	BiNode<T> * rchild;	//节点右孩子指针域
+	BiNode() :lchild(nullptr), rchild(nullptr){};
 };
 
 enum Order{Pre,In,Post,Level};		//前、中、后、层序枚举
@@ -20,7 +21,7 @@ template <class T>
 class BiTree
 {
 private:
-	
+//	void Create(BiNode<T> ** R);	//非递归创建二叉树，用户输入前序字符串
 	void Create(BiNode<T> * & R);	//创建二叉树，用户根据提示输入节点字符
 	void Create(BiNode<T> * & R, T data[], int i, int n);	//根据 n 长度的 T 数组的位置 i 创建二叉树，T 数组是按照 2*i 和 2*i+1为子节点的方式
 	void Create(BiNode<T> * & R, T PreData[], T InData[], int s1, int e1, int s2, int e2);	//根据前序数组和中序数组创建二叉树，s1,e1,s2,e2分别为两个数组的起始、终结点
@@ -45,6 +46,29 @@ public:
 	int Leaf(BiNode<T> * R);		//
 	int CountNode(BiNode<T> * R);	//
 };
+
+//template <class T>
+//void BiTree<T>::Create(BiNode<T> ** R)
+//{
+//	BiNode<T> ** Stack[MAXSIZE];
+//	int top = -1;
+//	char ch;
+//	do
+//	{
+//		cin >> ch;
+//		while (ch != '#')
+//		{
+//			*R = new BiNode<T>;
+//			(*R)->data = ch;
+//			(*R)->lchild = (*R)->rchild = nullptr;
+//			Stack[++top] = R;
+//			R = &((*R)->lchild);
+//			cin >> ch;
+//		}
+//		R = &( (*Stack[top])->rchild );
+//		top--;
+//	} while (top != -1 || ([i]))
+//}
 
 template <class T>
 void BiTree<T>::Create(BiNode<T> * & R)
@@ -172,16 +196,36 @@ void BiTree<T>::Print(Order porder)
 	cout << endl;
 }
 
+//递归前序遍历树
+//template <class T>
+//void BiTree<T>::PreOrder(BiNode<T> * R)
+//{
+//	if (R == nullptr)
+//		return;
+//	else{
+//		cout << R->data;
+//		PreOrder(R->lchild);
+//		PreOrder(R->rchild);
+//	}
+//}
+
+//非递归前序遍历树
 template <class T>
 void BiTree<T>::PreOrder(BiNode<T> * R)
 {
-	if (R == nullptr)
-		return;
-	else{
-		cout << R->data;
-		PreOrder(R->lchild);
-		PreOrder(R->rchild);
-	}
+	BiNode<T> * Stack[100];
+	int top = -1;
+	while ((top != -1) || R != nullptr){
+		if (R != nullptr){
+			cout << R->data;
+			Stack[++top] = R;
+			R = R->lchild;
+		}
+		else{
+			R = Stack[top--];
+			R = R->rchild;
+		}
+	}	
 }
 
 template <class T>

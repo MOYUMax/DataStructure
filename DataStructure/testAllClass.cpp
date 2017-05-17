@@ -41,8 +41,8 @@ void testSeqList()
 	list.PrintList();
 	int p = list.Locate(4);
 	cout << "the element 4's locates: " << p << endl;
-	list.Swap();
-	cout << "after Swap the list:";
+	list.Reverse();
+	cout << "after reverse the list:";
 	list.PrintList();
 
 	return;
@@ -69,7 +69,7 @@ void testLinkList()
 	Mearge(A, list, C);
 	cout << "after Mearge A with list:";
 	C.PrintList();
-	C.Swap();
+	C.Reverse();
 	cout << "after Swap LinkList C :";
 	C.PrintList();
 
@@ -315,20 +315,20 @@ void testCLinkQueue()
 
 	cout << "\nend\n";
 }
-
+//十进制数 n 转换任意 base进制数，用除余入栈的方法。
 void convert(unsigned n, unsigned base)
 {
 	SeqStack<unsigned> seq_stack;
 	unsigned i = n,j = 0;
 	while (i){
-		j = i%base;
+		j = i % base;
 		seq_stack.Push(j);
 		i /= base;
 	}
 	while (!seq_stack.Empty()){
 		j = seq_stack.Pop();
 		if (j > 9){
-			char c = j + 55;
+			char c = j + 55;	//对大于9的数采用字母来转换
 			cout << c;
 		}
 		else
@@ -436,4 +436,322 @@ void testHuffmanTree()
 	char str[10];
 	huff.Decode(code, str, 8);
 	cout << "Decode : " << str << endl;
+}
+
+const int MAXV = 10;
+bool visitedVex[MAXV] = { false };
+
+void testMGraph()
+{
+	char a[9] = "ABCDEFGH";
+	MGraph<char> mGraph(a, 8, 14);
+	mGraph.DFS(0);
+	cout << endl;
+	for (int i = 0; i < MAXV;++i)
+		visitedVex[i] = false;
+	mGraph.BFS(0);
+}
+
+void testALGraph()
+{
+	/*char a[9] = "ABCDEFGH";
+	ALGraph<char> alGraph(a, 8, 14);*/
+
+	ALGraph<char> alGraph;
+	alGraph.DFS(0);
+	cout << endl;
+	for (int i = 0; i < MAXV; ++i)
+		visitedVex[i] = false;
+	alGraph.BFS(0);
+
+}
+
+void testPrim()
+{
+	MGraph<char> mGraph;
+//	mGraph.Prim();
+//	mGraph.Kruskal();
+//	mGraph.Dijkstra(0);
+	mGraph.Floyd();
+}
+
+void testLinkHashTable()
+{
+	int r[12] = { 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	LinkHashTable<int> LHTI(13);
+	LHTI.CreateHashTable(r, 12);
+	cout << "ASL for success:" << LHTI.ASL(true, 12) << endl;
+	cout << "ASL for unsuccess:" << LHTI.ASL(false, 12) << endl;
+	cout << "Find 11 :" << LHTI.Find(11) << endl;
+	cout << "Delete 27:" << LHTI.Delete(27) << endl;
+}
+
+void testBST()
+{
+	int a[7] = { 63, 90, 70, 55, 67, 42, 98 };
+	BST<int> bst(a, 7);
+	cout << "Search 90:" << bst.Search(bst.rootBST, 90)->data << endl;
+	cout << "Find 67 Level:" << bst.FindKeyLevel(bst.rootBST, 67, 1) << endl;
+	cout << "Delete 70 Level:" << bst.DeleteBST(bst.rootBST, 70) << endl;
+	cout << "Find 70 Level:" << bst.FindKeyLevel(bst.rootBST, 70) << endl;
+	cout << "BST IsSorted:" << bst.IsSorted(bst.rootBST) << endl;
+}
+
+void testSort()
+{
+	int a[8] = { 0,63, 90, 70, 55, 67, 42, 98 };
+	Sort<int> sortInt;
+	sortInt.BubbleSort(a, 7);
+	sortInt.Print(a, 7);
+
+	int aa[8] = { 0, 63, 90, 70, 55, 67, 42, 98 };
+	sortInt.bidBubbleSort(aa, 7);
+	sortInt.Print(aa, 7);
+	/*int b[13] = { 0,19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	sortInt.SelectSort(b, 6);
+	sortInt.Print(b, 12);
+	
+	sortInt.InsertSort(b, 12);
+	sortInt.Print(b, 12);
+
+	int c[20] = { 0,63, 90, 70, 55, 67, 42, 98, 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	sortInt.ShellSort(c, 19);
+	sortInt.Print(c, 19);
+
+	int d[20] = { 0, 63, 90, 70, 55, 67, 42, 98, 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	sortInt.MergeSort(d, 19);
+	sortInt.Print(d, 19);
+*/
+	int e[20] = { 0, 63, 90, 70, 55, 67, 42, 98, 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	sortInt.QuickSort(e, 19);
+	sortInt.Print(e, 19);
+	
+	int ee[20] = { 0, 63, 90, 70, 55, 67, 42, 98, 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	sortInt.bidBubbleSort(ee, 19);
+	sortInt.Print(ee, 19);
+}
+//practice 8.5.2
+void SeperateOddEven(int a[], int n)
+{
+	int low = 0;
+	int high = n;
+	while (low < high){
+		while (low<high && a[low] % 2 == 1)
+			++low;
+		while (low < high && a[high] % 2 == 0)
+			--high;
+		int temp = a[low];
+		a[low] = a[high];
+		a[high] = temp;
+		++low;
+		--high;
+	}
+}
+
+void testSeperateOddEven()
+{
+	int ee[20] = { 0, 63, 90, 70, 55, 67, 42, 98, 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	SeperateOddEven(ee, 20);
+	for (int i = 0; i < sizeof(ee) / sizeof(int); ++i){
+		cout << ee[i] << " ";
+	}
+	cout << endl;
+}
+//练习8.5.3，根据快排思想求第 K 小数的 qsort函数变形
+int qsort(int a[], int start, int end, int k){
+	Sort<int> sort;
+	int pos = sort.Partition(a, start,end);
+	if (k == pos)return pos;
+	else if (k > pos)return qsort(a, pos + 1, end, k);
+	else return qsort(a, start, pos - 1, k);
+}
+//练习8.5.3，用快排思想求第 K 小的数
+int QuickKTH(int a[], int n, int k)
+{
+	if (k > n)
+		return 0;
+	return qsort(a, 1, n, k);
+}
+void testQuickKTH()
+{
+	int ee[20] = { 0, 63, 90, 70, 55, 67, 42, 98, 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	cout << "The 8th of ee " << ee[QuickKTH(ee, 19, 8)] << endl;
+	Sort<int> sortInt;
+	Qsort(ee, 0, 19);			//练习8.5.4快速排序的非递归实现
+	//sortInt.QuickSort(ee, 19);
+	sortInt.Print(ee, 19);
+	
+}
+
+void Qsort(int a[], int start, int end)
+{
+	Sort<int> sort;
+	int pivot = start;
+	int stack[MAXSIZE];
+	int top = -1;
+	if (start < end){
+		stack[++top] = start;
+		stack[++top] = end;
+	}
+	while (top != -1){
+		end = stack[top--];
+		start = stack[top--];
+		int pos = sort.Partition(a, start, end);
+		if (start < pos - 1){
+			stack[++top] = start;
+			stack[++top] = pos - 1;
+		}
+		if (end > pos + 1){
+			stack[++top] = pos + 1;
+			stack[++top] = end;
+		}
+	}
+}
+//练习8.5.4，链表的排序实现：简单选择、直接插入、冒泡
+void LinkSelectSort(Node<int> * front)
+{
+	Node<int> * p, *q, *s;
+	p = front->next;
+	while (p != nullptr){
+		s = p;
+		q = p->next;
+		while (q != nullptr){
+			if (q->data < s->data)s = q;
+			q = q->next;
+		}
+		if (p != s){
+			int temp = p->data;
+			p->data = s->data;
+			s->data = temp;
+		}
+		p = p->next;
+	}
+}
+void LinkInsertSort(Node<int> * front)
+{
+	Node<int> *p, *q, *s;
+	p = front;
+	q = p->next;
+	
+	while (p->next != nullptr && q->next != nullptr){
+		p = front;
+		while (p != q && p->next->data < q->next->data){
+			p = p->next;
+		}
+		if (p == q){
+			q = q->next;
+		}
+		else
+		{
+			s = q->next;
+			q->next = s->next;
+			s->next = p->next;
+			p->next = s;
+		}
+	}
+}
+void LinkBubbleSort(Node<int> * front)
+{
+	Node<int> *p, *r;
+	p = front->next;
+	r = nullptr;
+	while (p != nullptr && r != front->next){
+		p = front->next;
+		while (p->next != r){
+			if (p->data > p->next->data){
+				int temp = p->data;
+				p->data = p->next->data;
+				p->next->data = temp;
+			}
+			p = p->next;
+		}
+		r = p;		
+	}
+}
+void testLinkSort()
+{
+	int a[8] = { 0, 63, 90, 70, 55, 67, 42, 98 };
+	LinkList<int> * list = new LinkList<int>(a, 8);
+	cout << "LinkList before sort:" << endl;
+	list->PrintList();
+	cout << "After Sort:" << endl;
+//	LinkBubbleSort(list->GetFront());
+//	LinkInsertSort(list->GetFront());
+	LinkSelectSort(list->GetFront());
+
+	list->PrintList();
+}
+
+void HeapAdjustNP(int a[], int n)
+{
+	int start = 1;
+	int end = n + 1;
+	if (a[end] > a[end / 2]){
+		for (int i = end / 2; i >= start; i /= 2){
+			int j = 2 * i;
+			if (a[j] < a[j + 1])++j;
+			if (a[i] < a[j]){
+				a[0] = a[j];
+				a[j] = a[i];
+				a[i] = a[0];
+			}
+		}
+	}
+}
+void testHeapAdjustNP()
+{
+	int a[8] = { 0, 63, 90, 70, 55, 67, 42, 98 };
+	Sort<int> sortInt;
+	/*sortInt.HeapSort(a, 7);
+	sortInt.Print(a, 7);*/
+	for (int i = 6 / 2; i >= 1; --i){
+		sortInt.HeapAdjust(a, i, 6);
+	}
+	cout << "The 6 BigHeap:\n";
+	sortInt.Print(a, 7);
+	cout << "The n+1 BigHeap:\n";
+	HeapAdjustNP(a, 6);
+	sortInt.Print(a, 7);
+}
+
+void shuffle(char a[], int n)
+{
+	int start = 0;
+	int end = n - 1;
+	int current = 0;
+	char temp;
+	while (current <= end){
+		if (a[current] == 'R'){
+			temp = a[start];
+			a[start] = a[current];
+			a[current] = temp;
+			++start;
+			++current;
+		}
+		else if (a[current] == 'B'){
+			temp = a[end];
+			a[end] = a[current];
+			a[current] = temp;
+			--end;
+		}else
+			++current;
+	}
+}
+void testshuffle()
+{
+	char a[11] = "RBWBBWWBBR";
+	cout << "Before shuffle:" << a << endl;
+	shuffle(a, 10);
+	cout << "After shuffle:" << a << endl;
+}
+void testMergeSortWithInsertSort()
+{
+	int aa[20] = { 0, 63, 90, 70, 55, 67, 42, 98, 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	int ee[20] = { 0, 63, 90, 70, 55, 67, 42, 98, 19, 14, 23, 01, 68, 20, 84, 27, 55, 11, 10, 79 };
+	Sort<int> mysort;
+	mysort.MergeSort(aa, 19);
+	mysort.Print(aa, 19);
+
+	mysort.MergeSortBest(ee, 1, 20);
+	mysort.Print(ee, 19);
 }
